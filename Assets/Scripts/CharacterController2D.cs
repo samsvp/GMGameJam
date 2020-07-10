@@ -23,7 +23,7 @@ public class CharacterController2D : MonoBehaviour
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
-    private Rigidbody2D m_Rigidbody2D;
+    private Rigidbody2D rb2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
@@ -33,27 +33,30 @@ public class CharacterController2D : MonoBehaviour
     private float dashCoolDown = 0.01f;
     [SerializeField]
     private float dashTimer = 1; // Amount of time the dash lasts
-    private WaitForSeconds dashTimerWait;
-    private WaitForSeconds dashCooldownWait;
     [SerializeField]
     private float dashSpeedMultipler = 2;
 
+    private Animator anim;
+    [SerializeField]
+    private Sprite jumpSprite;
+    private SpriteRenderer sR;
+
+    private bool isDashingCooldown;
+    private float dashCooldown;
 
     [Header("Events")]
     [Space]
 
     public UnityEvent OnLandEvent;
-    private bool isDashingCooldown;
-    private float dashCooldown;
 
     [System.Serializable]
     public class BoolEvent : UnityEvent<bool> { }
 
     private void Awake()
     {
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        dashCooldownWait = new WaitForSeconds(dashCoolDown);
-        dashTimerWait = new WaitForSeconds(dashTimer);
+        rb2D = GetComponent<Rigidbody2D>();
+        sR = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -61,6 +64,12 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDashing)
+        {
+            anim.enabled = true;
+            return;
+        }
+
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -73,7 +82,15 @@ public class CharacterController2D : MonoBehaviour
             {
                 m_Grounded = true;
                 if (!wasGrounded)
+                {
+                    anim.enabled = false;
+                    sR.sprite = jumpSprite;
+                }
+                else
+                {
                     OnLandEvent.Invoke();
+                    anim.enabled = true;
+                }
             }
         }
     }
@@ -93,10 +110,13 @@ public class CharacterController2D : MonoBehaviour
         {
             // Move the character by finding the target velocity
             
-            Vector3 targetVelocity = isDashing ? new Vector2(move * 10f * dashSpeedMultipler, m_Rigidbody2D.velocity.y) :
-                                                 new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            Vector3 targetVelocity = isDashing ? new Vector2(move * 10f * dashSpeedMultipler, rb2D.velocity.y) :
+                                                 new Vector2(move * 10f, rb2D.velocity.y);
             // And then smoothing it out and applying it to the character
-            m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            rb2D.velocity = Vector3.SmoothDamp(rb2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
+            if (move == 0) anim.SetBool("run", false);
+            else anim.SetBool("run", true);
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -116,13 +136,14 @@ public class CharacterController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            rb2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
 
 
     private IEnumerator Dash()
     {
+        anim.SetTrigger("dash");
         yield return new WaitForSeconds(dashTimer);
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);

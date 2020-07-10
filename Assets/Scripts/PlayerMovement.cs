@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMove = 0f;
     private bool jump = false;
     private bool dash = false;
-
+    
     // Update is called once per frame
     void Update()
     {
