@@ -269,7 +269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_JumpForce: 700
-  m_CrouchSpeed: 0.5
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
@@ -278,10 +277,10 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 1002370671}
   m_CeilingCheck: {fileID: 232934230}
   m_CrouchDisableCollider: {fileID: 0}
+  dashCoolDown: 0.05
+  dashTimer: 0.25
+  dashSpeedMultipler: 3
   OnLandEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!212 &886702592
@@ -426,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 886702591}
-  runSpeed: 40
+  runSpeed: 20
 --- !u!1 &1002370670
 GameObject:
   m_ObjectHideFlags: 0
