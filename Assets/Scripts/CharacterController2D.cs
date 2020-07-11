@@ -287,4 +287,11 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("DeathPlane")) StartCoroutine(Death());
+    }
+
 }
