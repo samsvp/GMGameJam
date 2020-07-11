@@ -67,7 +67,6 @@ public class BackgroundLoop : MonoBehaviour{
         foreach(Level level in levels){
             repositionChildObjects(level.levelSprite); 
             float parallaxSpeed = level.speed;
-            Debug.Log(parallaxSpeed);
             float difference = transform.position.x - lastScreenPosition.x;
             level.levelSprite.transform.Translate(Vector3.right * difference * parallaxSpeed);
         }
