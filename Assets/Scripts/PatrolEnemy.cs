@@ -2,15 +2,21 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum EnemyStates
+{
+
+    playerFound
+}
 public class PatrolEnemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     private Rigidbody2D rb2D;
     private Transform transform;
     private Vector3 initialPosition;
+    private EnemyStates currentState;
+    private Vector2 playerPosition;
     public float walkRange = 2;
     public float viewDistance = 5;
+    public Vector2 walkGoal;
 
     public float speed;
     public bool facingRight = true;
@@ -25,8 +31,45 @@ public class PatrolEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        walk();
-        Debug.Log(searchPlayer());
+        /*
+        switch (currentState)
+        {
+            case EnemyStates.playerFound:
+                chase();
+                break;
+            default:
+                patrol();
+                if (searchPlayer())
+                {
+                    currentState = EnemyStates.playerFound;
+                }
+                break;
+        }
+        */
+        walk(walkGoal);
+    }
+    void walk(Vector2 goal)
+    {
+        if (transform.position.x <= Mathf.Min(goal.x - 0.1f,goal.x + 0.1f) || transform.position.x >= Mathf.Max(goal.x - 0.1f,goal.x + 0.1f))
+        {
+            if (transform.position.x < goal.x)
+            {
+                facingRight = true;
+            }
+            if (transform.position.x > goal.x)
+            {
+                facingRight = false;
+            }
+
+            if (facingRight)
+            {
+                transform.Translate(1 * Time.deltaTime * speed, 0, 0);
+            }
+            else
+            {
+                transform.Translate(-1 * Time.deltaTime * speed, 0, 0);
+            }
+        }
     }
     bool searchPlayer()
     {
@@ -41,14 +84,15 @@ public class PatrolEnemy : MonoBehaviour
         }
         if (hit2D)
         {
-            if(hit2D.transform.tag == "Player")
+            if (hit2D.transform.tag == "Player")
             {
+                playerPosition = hit2D.point;
                 return true;
             }
         }
         return false;
     }
-    void walk()
+    void patrol()
     {
         if ((initialPosition.x - walkRange) > transform.position.x)
         {
@@ -60,11 +104,11 @@ public class PatrolEnemy : MonoBehaviour
         }
         if (facingRight)
         {
-            transform.Translate(1 * Time.deltaTime, 0, 0);
+            transform.Translate(1 * Time.deltaTime * speed, 0, 0);
         }
         else
         {
-            transform.Translate(-1 * Time.deltaTime, 0, 0);
+            transform.Translate(-1 * Time.deltaTime * speed, 0, 0);
         }
     }
 }
