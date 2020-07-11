@@ -40,9 +40,18 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField]
     private Sprite jumpSprite;
     private SpriteRenderer sR;
-
+    
+    // Dashing
     private bool isDashingCooldown;
     private float dashCooldown;
+
+    // Shooting
+    private bool isShooting = false;
+    private bool isShootingCooldown = false;
+    [SerializeField]
+    private float shootingCooldown = 0.3f;
+    [SerializeField]
+    private GameObject bullet;
 
     [Header("Events")]
     [Space]
@@ -62,9 +71,22 @@ public class CharacterController2D : MonoBehaviour
             OnLandEvent = new UnityEvent();
     }
 
+
+    private void Update()
+    {
+        Shoot();
+    }
+
+
     private void FixedUpdate()
     {
         if (isDashing)
+        {
+            anim.enabled = true;
+            return;
+        }
+
+        if (isShooting)
         {
             anim.enabled = true;
             return;
@@ -139,6 +161,36 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             rb2D.AddForce(new Vector2(0f, m_JumpForce));
         }
+    }
+
+
+    private void Shoot()
+    {
+        if (isShootingCooldown) return;
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (!isDashing) anim.SetBool("shoot", true);
+            StartCoroutine(_Shoot());
+            if (m_FacingRight) Instantiate(bullet, transform.position + transform.right, Quaternion.identity);
+            else
+            {
+                GameObject mBullet = Instantiate(bullet, transform.position - transform.right, Quaternion.identity);
+                mBullet.GetComponent<Bullet>().speed *= -1;
+                mBullet.GetComponent<SpriteRenderer>().flipX = !mBullet.GetComponent<SpriteRenderer>().flipX;
+            }
+        }
+    }
+    
+
+    private IEnumerator _Shoot()
+    {
+        isShooting = true;
+        isShootingCooldown = true;
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
+        isShooting = false;
+        anim.SetBool("shoot", false);
+        yield return new WaitForSeconds(shootingCooldown);
+        isShootingCooldown = false;
     }
 
 
