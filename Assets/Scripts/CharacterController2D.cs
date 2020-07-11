@@ -70,6 +70,12 @@ public class CharacterController2D : MonoBehaviour
             return;
         }
 
+        if (m_GroundCheck)
+        {
+            anim.enabled = false;
+            sR.sprite = jumpSprite;
+        }
+
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -81,12 +87,7 @@ public class CharacterController2D : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 m_Grounded = true;
-                if (!wasGrounded)
-                {
-                    anim.enabled = false;
-                    sR.sprite = jumpSprite;
-                }
-                else
+                if (wasGrounded)
                 {
                     OnLandEvent.Invoke();
                     anim.enabled = true;
