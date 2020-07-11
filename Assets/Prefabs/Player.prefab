@@ -238,13 +238,14 @@ MonoBehaviour:
   dashTimer: 0.25
   dashSpeedMultipler: 2.5
   jumpSprite: {fileID: 21300000, guid: 972f582b6d26d5c4a9ea30250a1bc06d, type: 3}
-  shootingCooldown: 0.5
+  shootingCooldown: 0.05
   bullet: {fileID: 8351077530026344802, guid: 254e1c4d0c0cff44aac43c17322aa7d6, type: 3}
   damagedSprite: {fileID: 21300000, guid: 50da5ad1fab8f3544ac09c44bb775955, type: 3}
   invicibilityTimer: 0.5
   jumpClip: {fileID: 8300000, guid: 4d2dab1212e43364e84251b22cff8b79, type: 3}
   dashClip: {fileID: 8300000, guid: 0ea4cb60966746b4baf3ddd730a492aa, type: 3}
   shootClip: {fileID: 8300000, guid: 7c7259cc63dcce74c869df7ef275cabd, type: 3}
+  damageClip: {fileID: 8300000, guid: d5641433a4e84b04ab8572ba80ffc77c, type: 3}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []

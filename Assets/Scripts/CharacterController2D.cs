@@ -70,7 +70,9 @@ public class CharacterController2D : MonoBehaviour
     private AudioClip dashClip;
     [SerializeField]
     private AudioClip shootClip;
-    
+    [SerializeField]
+    private AudioClip damageClip;
+
 
     [Header("Events")]
     [Space]
@@ -247,6 +249,10 @@ public class CharacterController2D : MonoBehaviour
     private void TakeDamage()
     {
         if (isInvicible) return;
+
+        aS.clip = damageClip;
+        aS.Play();
+
         rb2D.velocity = Vector2.zero;
         if (--HP < 0) StartCoroutine(Death());
         else StartCoroutine(_TakeDamage());
