@@ -25,13 +25,12 @@ public class PatrolEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        patrol();
+        walk();
         Debug.Log(searchPlayer());
     }
     bool searchPlayer()
     {
         RaycastHit2D hit2D;
-        Vector2 origin = new Vector2(transform.position.x, transform.position.y);
         if (facingRight)
         {
             hit2D = Physics2D.Raycast(transform.position, Vector2.right, viewDistance);
@@ -49,7 +48,7 @@ public class PatrolEnemy : MonoBehaviour
         }
         return false;
     }
-    void patrol()
+    void walk()
     {
         if ((initialPosition.x - walkRange) > transform.position.x)
         {
