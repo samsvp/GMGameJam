@@ -320,8 +320,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711285199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.32, y: -0.252, z: 300}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0.098, y: -0.252, z: 300}
+  m_LocalScale: {x: 10.2699995, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
   m_RootOrder: 1
@@ -407,8 +407,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 931718134}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.083, y: 0.017, z: 400}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalPosition: {x: 0.591, y: -1.264, z: 400}
+  m_LocalScale: {x: 10.434599, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
   m_RootOrder: 2
@@ -4546,21 +4546,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4447477847945204174, guid: 511ffebaf3a99c340b18e6b19fa07870,
-        type: 3}
-      propertyPath: runSpeed
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4447477847945204276, guid: 511ffebaf3a99c340b18e6b19fa07870,
-        type: 3}
-      propertyPath: dashSpeedMultipler
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4447477847945204276, guid: 511ffebaf3a99c340b18e6b19fa07870,
-        type: 3}
-      propertyPath: m_JumpForce
-      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4447477847945204277, guid: 511ffebaf3a99c340b18e6b19fa07870,
         type: 3}
