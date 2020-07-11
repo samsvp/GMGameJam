@@ -150,7 +150,10 @@ public class PatrolEnemy : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        col.SendMessage("TakeDamage", SendMessageOptions.DontRequireReceiver);
+        if (col.transform.tag == "Player")
+        {
+            col.SendMessage("TakeDamage", SendMessageOptions.DontRequireReceiver);
+        }
     }
     private void TakeDamage()
     {
