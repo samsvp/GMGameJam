@@ -18,6 +18,7 @@ public class PatrolEnemy : MonoBehaviour
     private SpriteRenderer sRenderer;
     private AudioSource aSource;
     private float soundTime;
+    private float HP = 1; 
     public Transform playerTransform;
     public float audioInterval;
     public float walkRange = 2;
@@ -147,4 +148,13 @@ public class PatrolEnemy : MonoBehaviour
             transform.Translate(-1 * Time.deltaTime * searchSpeed, 0, 0);
         }
     }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        col.SendMessage("TakeDamage", SendMessageOptions.DontRequireReceiver);
+    }
+    private void TakeDamage()
+    {
+        if (--HP < 0) Destroy(gameObject);
+    }
+
 }
