@@ -57,10 +57,16 @@ public class PatrolEnemy : MonoBehaviour
                 chase(playerTransform.position);
                 if(soundTime > audioInterval)
                 {
+                soundTime = 0;
                 aSource.clip = sounds[Random.Range(0, sounds.Length - 1)];
                 aSource.Play();
-                soundTime = 0;
                 }
+                if (Mathf.Abs(playerTransform.position.y - transform.position.y) > 5)
+                {
+                    currentState = EnemyStates.searching;
+                    initialPosition = transform.position;
+                }
+
                 break;
             case EnemyStates.searching:
 
