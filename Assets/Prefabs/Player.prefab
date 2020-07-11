@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf83c94b80eb7244843ec9620f77255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 700
+  m_JumpForce: 800
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 0}
   dashCoolDown: 0.05
   dashTimer: 0.25
-  dashSpeedMultipler: 3
+  dashSpeedMultipler: 2
   jumpSprite: {fileID: 21300000, guid: 972f582b6d26d5c4a9ea30250a1bc06d, type: 3}
   OnLandEvent:
     m_PersistentCalls:
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4447477847945204276}
-  runSpeed: 20
+  runSpeed: 35
 --- !u!95 &4447477847945204173
 Animator:
   serializedVersion: 3
