@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BackgroundMix
+  m_Shader: {fileID: 4800000, guid: 0558185b82f6e5642a314af67c546d0e, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BlendTex:
+        m_Texture: {fileID: 2800000, guid: 09682860281eac94f87594c9ed256f25, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: a8db1ee69722591489fccd0fab909abc, type: 3}
+        m_Scale: {x: 5, y: 5}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AmplitudeX: 5
+    - _AmplitudeY: 10
+    - _BlendMode: 3
+    - _BlendStay: 0.1
+    - _BlendTimeScaling: 10
+    - _BlendWarp: 10
+    - _CellSize: 1
+    - _CompressionX: 3
+    - _CompressionY: 0.1
+    - _DistortX: 1
+    - _DistortY: 4
+    - _FrequencyX: 0.5
+    - _FrequencyY: 0.5
+    - _ScrollSpeed: 1
+    - _TextureSize: 64
+    - _TimeScalingX: 64
+    - _TimeScalingY: 64
+    m_Colors:
+    - _BlendTintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainTintColor: {r: 1, g: 1, b: 1, a: 1}
