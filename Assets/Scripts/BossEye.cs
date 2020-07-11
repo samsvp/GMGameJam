@@ -7,9 +7,12 @@ public class BossEye : MonoBehaviour
 
     [SerializeField]
     private int HP = 50;
+    private int maxHP;
 
     [SerializeField]
     private float speed = 5;
+
+    private SpriteRenderer sR;
 
     // Lighting
     [SerializeField]
@@ -27,7 +30,10 @@ public class BossEye : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sR = GetComponent<SpriteRenderer>();
+
         initialPosition = transform.position;
+        maxHP = HP;
         StartCoroutine(StateMachine());
     }
 
@@ -55,7 +61,7 @@ public class BossEye : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        int numberOfBullets = Random.Range(4, 9);
+        int numberOfBullets = Random.Range(4, 7);
 
         float m = Random.Range(0.0f, 1.0f);
         float x = m > 0.5f ? 11.5f : -11.5f;
@@ -163,8 +169,10 @@ public class BossEye : MonoBehaviour
 
     private void TakeDamage()
     {
-        if (--HP < 0) Destroy(gameObject);
         print(HP);
+        float healthPercentage = HP / (float)maxHP;
+        sR.color = new Color(1, healthPercentage, healthPercentage);
+        if (--HP < 0) Destroy(gameObject);
     }
 
 

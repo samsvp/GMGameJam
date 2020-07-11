@@ -264,7 +264,6 @@ public class CharacterController2D : MonoBehaviour
 
     private IEnumerator _TakeDamage()
     {
-        dead = true;
         isInvicible = true;
         anim.enabled = false;
         sR.sprite = damagedSprite;
@@ -277,8 +276,8 @@ public class CharacterController2D : MonoBehaviour
 
     private IEnumerator Death()
     {
+        dead = true;
         isInvicible = true;
-
         anim.enabled = true;
         anim.SetTrigger("dead");
         yield return null;
