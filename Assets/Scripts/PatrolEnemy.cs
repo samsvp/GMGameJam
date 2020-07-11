@@ -8,31 +8,58 @@ public class PatrolEnemy : MonoBehaviour
 
     private Rigidbody2D rb2D;
     private Transform transform;
-    public float patrolRange;
-    public float speed;
     private Vector3 initialPosition;
-    public bool facingLeft = true;
+    public float walkRange = 2;
+    public float viewDistance = 5;
+
+    public float speed;
+    public bool facingRight = true;
 
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
         initialPosition = transform.position;
-        Debug.Log(initialPosition.x);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((initialPosition.x - patrolRange) > transform.position.x)
+        patrol();
+        Debug.Log(searchPlayer());
+    }
+    bool searchPlayer()
+    {
+        RaycastHit2D hit2D;
+        Vector2 origin = new Vector2(transform.position.x, transform.position.y);
+        if (facingRight)
         {
-            facingLeft = true;
+            hit2D = Physics2D.Raycast(transform.position, Vector2.right, viewDistance);
         }
-        if ((initialPosition.x + patrolRange) < transform.position.x)
+        else
         {
-            facingLeft = false;
+            hit2D = Physics2D.Raycast(transform.position, Vector2.left, viewDistance);
         }
-        if (facingLeft)
+        if (hit2D)
+        {
+            if(hit2D.transform.tag == "Player")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    void patrol()
+    {
+        if ((initialPosition.x - walkRange) > transform.position.x)
+        {
+            facingRight = true;
+        }
+        if ((initialPosition.x + walkRange) < transform.position.x)
+        {
+            facingRight = false;
+        }
+        if (facingRight)
         {
             transform.Translate(1 * Time.deltaTime, 0, 0);
         }
