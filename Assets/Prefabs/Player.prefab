@@ -172,7 +172,7 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 0}
   dashCoolDown: 0.05
   dashTimer: 0.25
-  dashSpeedMultipler: 2
+  dashSpeedMultipler: 2.5
   jumpSprite: {fileID: 21300000, guid: 972f582b6d26d5c4a9ea30250a1bc06d, type: 3}
   OnLandEvent:
     m_PersistentCalls:
