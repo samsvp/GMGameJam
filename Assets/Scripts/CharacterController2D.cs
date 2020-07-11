@@ -61,6 +61,16 @@ public class CharacterController2D : MonoBehaviour
     private float invicibilityTimer = 0.2f;
     private bool isInvicible;
 
+    // Audio
+    private AudioSource aS;
+    [SerializeField]
+    private AudioClip jumpClip;
+    [SerializeField]
+    private AudioClip dashClip;
+    [SerializeField]
+    private AudioClip shootClip;
+    
+
     [Header("Events")]
     [Space]
 
@@ -73,6 +83,7 @@ public class CharacterController2D : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         sR = GetComponent<SpriteRenderer>();
+        aS = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
 
         if (OnLandEvent == null)
@@ -171,6 +182,8 @@ public class CharacterController2D : MonoBehaviour
             // Add a vertical force to the player.
             m_Grounded = false;
             rb2D.AddForce(new Vector2(0f, m_JumpForce));
+            aS.clip = jumpClip;
+            aS.Play();
         }
     }
 
@@ -182,10 +195,12 @@ public class CharacterController2D : MonoBehaviour
         {
             if (!isDashing) anim.SetBool("shoot", true);
             StartCoroutine(_Shoot());
+            aS.clip = shootClip;
+            aS.Play();
             if (m_FacingRight) Instantiate(bullet, transform.position + transform.right, Quaternion.identity);
             else
             {
-                GameObject mBullet = Instantiate(bullet, transform.position - transform.right, Quaternion.identity);
+                GameObject mBullet = Instantiate(bullet, transform.position - 2f * transform.right, Quaternion.identity);
                 mBullet.GetComponent<Bullet>().speed *= -1;
                 mBullet.GetComponent<SpriteRenderer>().flipX = !mBullet.GetComponent<SpriteRenderer>().flipX;
             }
@@ -208,6 +223,8 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator Dash()
     {
         anim.SetTrigger("dash");
+        aS.clip = dashClip;
+        aS.Play();
         yield return new WaitForSeconds(dashTimer);
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
