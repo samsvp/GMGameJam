@@ -54,7 +54,7 @@ public class CharacterController2D : MonoBehaviour
     private GameObject bullet;
 
     // Health
-    int HP = 1;
+    int HP = 0;
     [SerializeField]
     private Sprite damagedSprite;
     [SerializeField]
@@ -229,9 +229,9 @@ public class CharacterController2D : MonoBehaviour
     private void TakeDamage()
     {
         if (isInvicible) return;
-        if (--HP < 0) Destroy(gameObject);
         rb2D.velocity = Vector2.zero;
-        StartCoroutine(_TakeDamage());
+        if (--HP < 0) StartCoroutine(Death());
+        else StartCoroutine(_TakeDamage());
     }
 
 
@@ -243,5 +243,14 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(invicibilityTimer);
         anim.enabled = true;
         isInvicible = false;
+    }
+
+
+    private IEnumerator Death()
+    {
+        isInvicible = true;
+        anim.SetTrigger("dead");
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
+        Destroy(gameObject);
     }
 }
