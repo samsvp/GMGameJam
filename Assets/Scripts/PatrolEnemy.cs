@@ -14,11 +14,18 @@ public class PatrolEnemy : MonoBehaviour
     private Transform transform;
     private Vector3 initialPosition;
     private EnemyStates currentState = EnemyStates.searching;
+    private Animator anim;
+    private SpriteRenderer sRenderer;
+    private AudioSource aSource;
+    private float soundTime;
     public Transform playerTransform;
+    public float audioInterval;
     public float walkRange = 2;
     public float viewDistance = 1;
     public Vector2 walkGoal;
 
+    public AudioClip[] sounds;
+ 
     public float searchSpeed, chaseSpeed;
     public bool facingRight = true;
 
@@ -27,18 +34,36 @@ public class PatrolEnemy : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         transform = GetComponent<Transform>();
         initialPosition = transform.position;
+        anim = GetComponent<Animator>();
+        sRenderer = GetComponent<SpriteRenderer>();
+        aSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(facingRight)
+        {
+            sRenderer.flipX = true;
+        }
+        else
+        {
+            sRenderer.flipX = false;
+        }
+     
+        soundTime += Time.deltaTime;
         switch (currentState)
         {
             case EnemyStates.chasing:
                 chase(playerTransform.position);
+                if(soundTime > audioInterval)
+                {
+                aSource.clip = sounds[Random.Range(0, sounds.Length - 1)];
+                aSource.Play();
+                soundTime = 0;
+                }
                 break;
             case EnemyStates.searching:
+
                 patrol();
                 if (searchPlayer())
                 {
@@ -52,6 +77,8 @@ public class PatrolEnemy : MonoBehaviour
     }
     void chase(Vector2 goal)
     {
+        anim.SetBool("run", true);
+        anim.SetFloat("runSpeed", 1.0f);
         if (transform.position.x <= Mathf.Min(goal.x - 0.1f,goal.x + 0.1f) || transform.position.x >= Mathf.Max(goal.x - 0.1f,goal.x + 0.1f))
         {
             if (transform.position.x < goal.x)
@@ -95,6 +122,8 @@ public class PatrolEnemy : MonoBehaviour
     }
     void patrol()
     {
+        anim.SetBool("run", true);
+        anim.SetFloat("runSpeed", 0.5f);
         if ((initialPosition.x - walkRange) > transform.position.x)
         {
             facingRight = true;
