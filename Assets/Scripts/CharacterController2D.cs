@@ -53,6 +53,14 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField]
     private GameObject bullet;
 
+    // Health
+    int HP = 1;
+    [SerializeField]
+    private Sprite damagedSprite;
+    [SerializeField]
+    private float invicibilityTimer = 0.2f;
+    private bool isInvicible;
+
     [Header("Events")]
     [Space]
 
@@ -74,12 +82,15 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+        if (isInvicible) return;
         Shoot();
     }
 
 
     private void FixedUpdate()
     {
+        if (isInvicible) return;
+
         if (isDashing)
         {
             anim.enabled = true;
@@ -212,5 +223,25 @@ public class CharacterController2D : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+
+    private void TakeDamage()
+    {
+        if (isInvicible) return;
+        if (--HP < 0) Destroy(gameObject);
+        rb2D.velocity = Vector2.zero;
+        StartCoroutine(_TakeDamage());
+    }
+
+
+    private IEnumerator _TakeDamage()
+    {
+        isInvicible = true;
+        anim.enabled = false;
+        sR.sprite = damagedSprite;
+        yield return new WaitForSeconds(invicibilityTimer);
+        anim.enabled = true;
+        isInvicible = false;
     }
 }
