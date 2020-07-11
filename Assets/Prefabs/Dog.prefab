@@ -163,10 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c291fbdacc883a84d85dd7e4bb28e283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 4447477847945204170, guid: 511ffebaf3a99c340b18e6b19fa07870,
+    type: 3}
   audioInterval: 2
   walkRange: 4
-  viewDistance: 3
+  viewDistance: 5
   walkGoal: {x: 0, y: 0}
   sounds:
   - {fileID: 8300000, guid: f62e9eb05009b244992e492a5f85334a, type: 3}
