@@ -61,6 +61,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField]
     private float invicibilityTimer = 0.2f;
     private bool isInvicible;
+    private bool dead = false;
 
     // Audio
     private AudioSource aS;
@@ -96,6 +97,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+        if (dead) return;
         if (isInvicible) return;
         Shoot();
     }
@@ -103,6 +105,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (dead) return;
         if (isInvicible) return;
 
         if (isDashing)
@@ -261,6 +264,7 @@ public class CharacterController2D : MonoBehaviour
 
     private IEnumerator _TakeDamage()
     {
+        dead = true;
         isInvicible = true;
         anim.enabled = false;
         sR.sprite = damagedSprite;
@@ -274,6 +278,8 @@ public class CharacterController2D : MonoBehaviour
     private IEnumerator Death()
     {
         isInvicible = true;
+
+        anim.enabled = true;
         anim.SetTrigger("dead");
         yield return null;
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
