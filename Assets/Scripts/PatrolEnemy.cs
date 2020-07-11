@@ -5,20 +5,21 @@ using UnityEngine.Events;
 public enum EnemyStates
 {
 
-    playerFound
+    chasing,
+    searching
 }
 public class PatrolEnemy : MonoBehaviour
 {
     private Rigidbody2D rb2D;
     private Transform transform;
     private Vector3 initialPosition;
-    private EnemyStates currentState;
-    private Vector2 playerPosition;
+    private EnemyStates currentState = EnemyStates.searching;
+    public Transform playerTransform;
     public float walkRange = 2;
-    public float viewDistance = 5;
+    public float viewDistance = 1;
     public Vector2 walkGoal;
 
-    public float speed;
+    public float searchSpeed, chaseSpeed;
     public bool facingRight = true;
 
     void Start()
@@ -31,24 +32,25 @@ public class PatrolEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         switch (currentState)
         {
-            case EnemyStates.playerFound:
-                chase();
+            case EnemyStates.chasing:
+                chase(playerTransform.position);
                 break;
-            default:
+            case EnemyStates.searching:
                 patrol();
                 if (searchPlayer())
                 {
-                    currentState = EnemyStates.playerFound;
+                    currentState = EnemyStates.chasing;
                 }
                 break;
+            default: 
+                currentState = EnemyStates.searching;
+                break;
         }
-        */
-        walk(walkGoal);
     }
-    void walk(Vector2 goal)
+    void chase(Vector2 goal)
     {
         if (transform.position.x <= Mathf.Min(goal.x - 0.1f,goal.x + 0.1f) || transform.position.x >= Mathf.Max(goal.x - 0.1f,goal.x + 0.1f))
         {
@@ -63,11 +65,11 @@ public class PatrolEnemy : MonoBehaviour
 
             if (facingRight)
             {
-                transform.Translate(1 * Time.deltaTime * speed, 0, 0);
+                transform.Translate(1 * Time.deltaTime * chaseSpeed, 0, 0);
             }
             else
             {
-                transform.Translate(-1 * Time.deltaTime * speed, 0, 0);
+                transform.Translate(-1 * Time.deltaTime * chaseSpeed, 0, 0);
             }
         }
     }
@@ -86,7 +88,6 @@ public class PatrolEnemy : MonoBehaviour
         {
             if (hit2D.transform.tag == "Player")
             {
-                playerPosition = hit2D.point;
                 return true;
             }
         }
@@ -104,11 +105,11 @@ public class PatrolEnemy : MonoBehaviour
         }
         if (facingRight)
         {
-            transform.Translate(1 * Time.deltaTime * speed, 0, 0);
+            transform.Translate(1 * Time.deltaTime * searchSpeed, 0, 0);
         }
         else
         {
-            transform.Translate(-1 * Time.deltaTime * speed, 0, 0);
+            transform.Translate(-1 * Time.deltaTime * searchSpeed, 0, 0);
         }
     }
 }
