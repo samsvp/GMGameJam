@@ -54,7 +54,7 @@ public class CharacterController2D : MonoBehaviour
     private GameObject bullet;
 
     // Health
-    int HP = 0;
+    int HP = 1;
     [SerializeField]
     private Sprite damagedSprite;
     [SerializeField]
@@ -257,6 +257,7 @@ public class CharacterController2D : MonoBehaviour
         isInvicible = true;
         anim.enabled = false;
         sR.sprite = damagedSprite;
+        sR.color = new Color(1, 0.47f, 0.47f);
         yield return new WaitForSeconds(invicibilityTimer);
         anim.enabled = true;
         isInvicible = false;
