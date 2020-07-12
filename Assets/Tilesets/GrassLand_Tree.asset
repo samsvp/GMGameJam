@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: GrassLand_Tree
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: d237738b6e8d29e48b65fc42a24df8fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06cb731b58489584d8a8e05bfdfe0933, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
