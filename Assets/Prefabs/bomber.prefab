@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 936080301}
   - component: {fileID: 936080302}
   m_Layer: 0
-  m_Name: sniper
+  m_Name: bomber
   m_TagString: Bomber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transform: {fileID: 3109430287530539455}
   anim: {fileID: 0}
-  bullet: {fileID: 5340887107456665693, guid: 18696f3220cd74947bdb8c773196418b, type: 3}
+  bullet: {fileID: 8751212467389387588, guid: c6d8fb583e532d04fa8dd6a3ee42d031, type: 3}
   shootInterval: 2
   searchRadius: 7.92
 --- !u!61 &936080301
