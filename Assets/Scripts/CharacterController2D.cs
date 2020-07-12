@@ -97,6 +97,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < -100) StartCoroutine(Death());
         if (PauseMenu.isPaused) return;
         if (dead) return;
         if (isInvicible) return;
@@ -292,6 +293,16 @@ public class CharacterController2D : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("DeathPlane")) StartCoroutine(Death());
+    }
+
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("DeathPlane")) StartCoroutine(Death());
+    }
+
+    void OnTriggerStay2D(Collider2D col)
     {
         if (col.CompareTag("DeathPlane")) StartCoroutine(Death());
     }

@@ -8,6 +8,11 @@ public class ChangeScene : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        {
+            int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+            System.IO.File.WriteAllText(GameManager.path, nextScene.ToString());
+            SceneManager.LoadScene(nextScene);
+        }
+            
     }
 }

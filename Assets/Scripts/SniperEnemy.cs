@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SniperEnemy : MonoBehaviour
 {
-    private int HP = 1;
+    private int HP = 0;
     private bool facingRight = true;
     private SpriteRenderer sRenderer;
     private float shootTime = 0;

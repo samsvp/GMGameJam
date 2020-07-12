@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 8d0aa41ebae587b4ba55e972e1326861
   - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 85c5d91ad7bfda54da46e5218c6169ef
+  - enabled: 1
     path: Assets/Scenes/IntroGrassLands.unity
     guid: 624a7843a9b4f7b40a777e5d6c0e3126
   - enabled: 1

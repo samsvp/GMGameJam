@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class End : MonoBehaviour
+public class Begin : MonoBehaviour
 {
 
     private Animator anim;
-
-    [SerializeField]
-    private GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        System.IO.File.WriteAllText(GameManager.path, "1");
     }
 
     // Update is called once per frame
@@ -24,20 +20,14 @@ public class End : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.92f)
         {
             anim.enabled = false;
-            StartCoroutine(CanvasShow());
+            StartCoroutine(BeginGame());
         }
     }
 
-    public void LoadMenu()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(0);
-    }
 
-
-    private IEnumerator CanvasShow()
+    private IEnumerator BeginGame()
     {
         yield return new WaitForSeconds(1);
-        canvas.SetActive(true);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

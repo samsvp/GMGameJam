@@ -18,7 +18,7 @@ public class PatrolEnemy : MonoBehaviour
     private SpriteRenderer sRenderer;
     private AudioSource aSource;
     private float soundTime;
-    private float HP = 1; 
+    private float HP = 0; 
     public Transform playerTransform;
     public float audioInterval;
     public float walkRange = 2;
