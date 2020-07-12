@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3109430287530539454}
   - component: {fileID: 3109430287530539452}
   - component: {fileID: 936080301}
+  - component: {fileID: 936080302}
   m_Layer: 0
   m_Name: sniper
   m_TagString: Bomber
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3109430287530539451}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.15, y: 0.89, z: -2.3359375}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,8 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1259408508766424310, guid: 9a3d8450055bf48438c8f53cfb57a35a,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1a593ddc344ac94883831696c5a3d79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transform: {fileID: 3109430287530539455}
+  anim: {fileID: 0}
   bullet: {fileID: 5340887107456665693, guid: 18696f3220cd74947bdb8c773196418b, type: 3}
   shootInterval: 2
   searchRadius: 7.92
@@ -113,16 +114,35 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004514098, y: 0}
+  m_Offset: {x: -0.021741882, y: -0.19639778}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.12, y: 0.5}
+    oldSize: {x: 0.64, y: 0.96}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1109717, y: 0.5}
+  m_Size: {x: 0.33227113, y: 0.47932625}
   m_EdgeRadius: 0
+--- !u!95 &936080302
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3109430287530539451}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6a51948df2abe74d9cd3532ee382e4c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

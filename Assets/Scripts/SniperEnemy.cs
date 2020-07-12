@@ -11,6 +11,7 @@ public class SniperEnemy : MonoBehaviour
     private Vector2 playerPos;
     private AudioSource aSource;
     public Transform transform;
+    public Animator anim;
     public GameObject bullet;
     public float shootInterval = 10;
     public float searchRadius;
@@ -19,6 +20,7 @@ public class SniperEnemy : MonoBehaviour
         transform = GetComponent<Transform>();
         sRenderer = GetComponent<SpriteRenderer>();
         aSource = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -30,6 +32,11 @@ public class SniperEnemy : MonoBehaviour
             search();
             shootTime = 0;
         }
+        else
+        {
+            anim.SetBool("shoot",false);
+        }
+
         if (transform.position.x < playerPos.x)
         {
             sRenderer.flipX = true;
@@ -60,6 +67,7 @@ public class SniperEnemy : MonoBehaviour
                     playerPos = hit.point;
                     var obj = GameObject.Instantiate(bullet, transform.position, transform.rotation);
                     obj.GetComponent<SniperBullet>().shoot(new Vector3(hit.point.x, hit.point.y + 2f, 0));
+                    anim.SetBool("shoot",true);
                     break;
                 }
             }
