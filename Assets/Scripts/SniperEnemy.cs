@@ -7,10 +7,12 @@ public class SniperEnemy : MonoBehaviour
     private int HP = 1;
     private bool facingRight = true;
     private SpriteRenderer sRenderer;
+    private float shootTime = 0;
     private Vector2 playerPos;
     private AudioSource aSource;
     public Transform transform;
-    public GameObject bullet; 
+    public GameObject bullet;
+    public float shootInterval = 10;
     public float searchRadius;
     void Start()
     {
@@ -21,7 +23,14 @@ public class SniperEnemy : MonoBehaviour
 
     void Update()
     {
-        if (facingRight)
+        shootTime += Time.deltaTime;
+
+        if (shootTime > shootInterval)
+        {
+            search();
+            shootTime = 0;
+        }
+        if (transform.position.x < playerPos.x)
         {
             sRenderer.flipX = true;
         }
@@ -29,7 +38,6 @@ public class SniperEnemy : MonoBehaviour
         {
             sRenderer.flipX = false;
         }
-        search();
     }
     void search()
     {
@@ -49,25 +57,18 @@ public class SniperEnemy : MonoBehaviour
             {
                 if (hit.transform.tag == "Player")
                 {
-                    shoot(hit.transform.position);
-                    return;
+                    playerPos = hit.point;
+                    var obj = GameObject.Instantiate(bullet, transform.position, transform.rotation);
+                    obj.GetComponent<SniperBullet>().shoot(new Vector3(hit.point.x, hit.point.y + 2f, 0));
+                    break;
                 }
             }
         }
-    }
-    void shoot(Vector3 target)
-    {
-        Vector3 heading = target - transform.position;
-        GameObject.Instantiate(bullet, transform.position, transform.rotation);
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, searchRadius);
-    }
-    private void shoot(Vector2 target)
-    {
-
     }
     private void TakeDamage()
     {
