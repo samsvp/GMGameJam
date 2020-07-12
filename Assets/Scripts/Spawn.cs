@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    private bool facingRight = true;
     private SpriteRenderer sRenderer;
     private Vector2 playerPos;
     private AudioSource aSource;
