@@ -5,7 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/IntroGrassLands.unity
+    guid: 624a7843a9b4f7b40a777e5d6c0e3126
+  - enabled: 1
+    path: Assets/Scenes/3Snow.unity
+    guid: 3020cbb16dd5a9e4fabb4018b971d910
+  - enabled: 1
+    path: Assets/Scenes/4SouthOfHeaven.unity
+    guid: 0e06084a114689546847788758d96f35
+  - enabled: 1
+    path: Assets/Scenes/2Castle.unity
+    guid: f8e0eb8c7ef8da442add7cc1681ba62f
+  - enabled: 1
+    path: Assets/Scenes/BossEye.unity
+    guid: 237db4fdbc6fe9242b8873c56fc17e10
   m_configObjects: {}
