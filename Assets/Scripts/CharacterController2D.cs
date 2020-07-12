@@ -97,6 +97,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.isPaused) return;
         if (dead) return;
         if (isInvicible) return;
         Shoot();
@@ -105,6 +106,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (PauseMenu.isPaused) return;
         if (dead) return;
         if (isInvicible) return;
 

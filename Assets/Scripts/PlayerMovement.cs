@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.isPaused) return;
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
@@ -27,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         {
             dash = true;
         }
-
 
     }
 
