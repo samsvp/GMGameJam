@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossEye.unity
     guid: 237db4fdbc6fe9242b8873c56fc17e10
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: c98f1b0bb00c5004ba70d097983b72a8
   m_configObjects: {}

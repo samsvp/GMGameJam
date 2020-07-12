@@ -27,6 +27,9 @@ public class BossEye : MonoBehaviour
 
     private Vector3 initialPosition;
 
+    [SerializeField]
+    private GameObject potion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -172,7 +175,11 @@ public class BossEye : MonoBehaviour
         print(HP);
         float healthPercentage = HP / (float)maxHP;
         sR.color = new Color(1, healthPercentage, healthPercentage);
-        if (--HP < 0) Destroy(gameObject);
+        if (--HP < 0)
+        {
+            potion.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
 
