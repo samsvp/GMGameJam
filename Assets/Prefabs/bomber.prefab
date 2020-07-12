@@ -99,8 +99,8 @@ MonoBehaviour:
   transform: {fileID: 3109430287530539455}
   anim: {fileID: 0}
   bullet: {fileID: 8751212467389387588, guid: c6d8fb583e532d04fa8dd6a3ee42d031, type: 3}
-  shootInterval: 2
-  searchRadius: 7.92
+  shootInterval: 1.5
+  searchRadius: 12
 --- !u!61 &936080301
 BoxCollider2D:
   m_ObjectHideFlags: 0
